@@ -30,27 +30,29 @@ var Media = new mongoose.Schema({
 ```
 
 ## Wireframes
-/
+/ - homepage (shows media files that were shared)
 
 ![home](/documentation/1-Home.png)
 
-/register
+/register - registering users
 
 ![register](/documentation/2-Register.png)
 
-/login
+/login - login users (user authentication)
 
 ![login](/documentation/3-Login.png)
 
-/user
+/user - user page
 
 ![user](/documentation/5-User.png)
 
-/user/share
+/user/share - used to share media files
 
 ![share](/documentation/4-Share.png)
 
 ## Site map
+
+![sitemap](/documentation/Baconlist.png)
 
 ## User stories
 1. as a user, I can post new links to media
