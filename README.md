@@ -42,6 +42,10 @@ var Media = new mongoose.Schema({
 
 ![login](/documentation/3-Login.png)
 
+/user
+
+![user](/documentatin/5-User.png)
+
 /user/share
 
 ![share](/documentation/4-Share.png)
