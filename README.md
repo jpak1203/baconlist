@@ -31,15 +31,19 @@ var Media = new mongoose.Schema({
 
 ## Wireframes
 /
+
 ![home](/documentation/1-Home.png)
 
 /register
+
 ![register](/documentation/2-Register.png)
 
 /login
+
 ![login](/documentation/3-Login.png)
 
 /user/share
+
 ![share](/documentation/4-Share.png)
 
 ## Site map
