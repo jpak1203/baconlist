@@ -44,7 +44,7 @@ var Media = new mongoose.Schema({
 
 /user
 
-![user](/documentatin/5-User.png)
+![user](/documentation/5-User.png)
 
 /user/share
 
