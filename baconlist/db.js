@@ -1,3 +1,6 @@
+var mongoose = require('mongoose'),
+	URLSlugs = require('mongoose-url-slugs');
+
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
 if (process.env.NODE_ENV == 'PRODUCTION') {
  // if we're in PRODUCTION mode, then read the configration from a file
