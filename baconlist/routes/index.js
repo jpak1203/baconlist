@@ -3,14 +3,33 @@ var router = express.Router();
 var passport = require('passport');
 var passportConfig = require('./passport-config.js');
 
+var mongoose = require('mongoose');
+var Media = mongoose.model("Media");
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  Media.find(function(err, media, count) {
+  	res.render("index", {media, media});
+  })
 });
 
 router.get('/share', function(req, res, next) {
 	res.render('share')
-})
+});
+
+router.post('/share', function(req, res, next) {
+	var newMedia = new Media({
+		title: req.body.title,
+		votes: 0,
+		url: req.body.url
+	});
+
+	newMedia.save(function(err, media, count) {
+		console.log(media);
+	})
+	
+	res.redirect('/')
+});
 
 /* GET login page. */
 router.get('/login', function(req, res) {

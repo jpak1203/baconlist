@@ -16,8 +16,10 @@ var User = new mongoose.Schema({
 // stores votes to determine baconking
 // url link for media file
 var Media = new mongoose.Schema({
+	title: String,
 	votes: Number,
 	url: String,
+	category: String,
 	user: User
 });
 

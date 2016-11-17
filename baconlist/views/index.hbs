@@ -12,3 +12,9 @@
 <form method="GET" action="/signup">
 	<input type="submit" value="Signup" />
 </form>
+
+<ul>
+	{{#each media}}
+	<li>{{this.title}} <a href="{{this.url}}" >{{this.url}}</a><span>votes: {{this.votes}}</span></li>
+	{{/each}}
+</ul>
