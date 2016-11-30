@@ -9,12 +9,22 @@ var Media = mongoose.model("Media");
 // GET home page.
 router.get('/', function(req, res, next) {
   Media.find(function(err, media, count) {
+  	for (var i = 1; i < media.length; i++) {
+  		if (media[i].votes > media[i-1].votes) {
+  			var temp = media[i];
+  			media[i] = media[i-1];
+  			media[i-1] = temp;
+  		}
+  	}
+  	
   	res.render("index", {media, media});
   })
 });
 
 router.post('/', function(req, res, next) {
-	Media.findOneAndUpdate({title:req.body.button}, {$inc:{votes:1}});
+	Media.findOneAndUpdate({title:req.body.button}, {$inc:{votes:1}}, function(err, media, count) {
+		console.log(media);
+	});
 	res.redirect('/');
 });
 
@@ -38,13 +48,14 @@ router.post('/share', function(req, res, next) {
 
 // GET login page.
 router.get('/login', function(req, res) {
-	res.render('login');
+	res.render("login", {action: 'Log in', error: req.flash('error')});
 });
 
 // Handle Login POST
 router.post('/login', passport.authenticate('login', {
 	successRedirect: '/',
 	failureRedirect: '/login',
+	failureFlash: true
 }));
 
 // GET Signup Page
@@ -56,6 +67,7 @@ router.get('/signup', function(req, res){
 router.post('/signup', passport.authenticate('signup', {
 	successRedirect: '/',
 	failureRedirect: '/signup',
+	failureFlash: true
 }));
 
 module.exports = router;

@@ -19,14 +19,14 @@
 	<form method="POST" action="/">
 		{{#each media}}
 		<div id="media-link" class="row">
-			<div class="col-xs-8">
+			<div class="col-xs-6">
 				<a href="{{this.url}}" >{{this.title}}</a>
 			</div>
 			<div class="col-xs-2">
 				<span id="voteNumber">votes: {{this.votes}}</span>
 			</div>
-			<div class="col-xs-2">
-				<input type="submit" name="button" class="btn btn-default" value={{this.title}} />
+			<div class="col-xs-4">
+				<span>Vote for : </span><input type="submit" name="button" class="btn btn-default" value={{this.title}} />
 			</div>
 		</div>
 		{{/each}}
@@ -37,5 +37,11 @@
 
 	document.addEventListener("DOMContentLoaded", function(event) {
 		
+		var voteButton = document.getElementsByClassName("btn");
+		voteButton.addEventListener("click", votePlusOne);
+
+		function votePlusOne(evt) {
+			evt.preventDefault();
+		}
 	});
 </script>
