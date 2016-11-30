@@ -1,16 +1,39 @@
 <div class="container-fluid">	
 	<div class="row">
-		<div class="col-xs-8">
+		<div class="col-xs-6">
 			<h1>BaconList</h1>
 			<p>Welcome to BaconList</p>
 		</div>
-		<div class="links col-xs-4">
-			<a href="/login">Login</a>
-			<a href="/signup">Signup</a>
-
-			<form method="GET" action="/share">
-				<input type="submit" value="Share some bacon!" />
-			</form>
+		<div class="bacon navbar-collapse col-xs-2">
+			<ul class="nav navbar-nav">
+				<li>
+					<form method="GET" action="/share">
+						<input type="submit" class="btn btn-primary" value="Share some bacon" />
+					</form>
+				</li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse links col-xs-4" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+				{{#if user}}
+				<li>
+					<p id="welcome"><strong>Hi,</strong> {{user.username}}</p>
+				</li>
+				<li>
+					<a href="/logout">Log Out</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				{{else}}
+				<li>
+					<a href="/login">Log In</a>
+				</li>
+				<li>
+					<a href="/signup">Sign Up</a>
+				</li>
+				{{/if}}
+			</ul>
 		</div>
 	</div>
 </div>
@@ -37,11 +60,6 @@
 
 	document.addEventListener("DOMContentLoaded", function(event) {
 		
-		var voteButton = document.getElementsByClassName("btn");
-		voteButton.addEventListener("click", votePlusOne);
-
-		function votePlusOne(evt) {
-			evt.preventDefault();
-		}
+		
 	});
 </script>

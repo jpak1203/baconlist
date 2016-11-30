@@ -51,8 +51,7 @@ passport.use('login', new LocalStrategy({
                 message: 'Invalid Password'
           });
         }
-        // User and password both match, return user from 
-        // done method which will be treated like success
+        // User and password both match, return user from done method which will be treated like success
         return done(null, user);
       }
     );
@@ -79,8 +78,7 @@ passport.use('signup', new LocalStrategy({
                 message: 'User already exists'
           });
         } else {
-          // if there is no user with that email
-          // create the user
+          // if there is no user with that email create the user
           var newUser = new User();
           // set the user's local credentials
           newUser.username = username;
@@ -101,8 +99,6 @@ passport.use('signup', new LocalStrategy({
         }
       });
     };
-     
-    // Delay the execution of findOrCreateUser and execute 
-    // the method in the next tick of the event loop
+
     process.nextTick(findOrCreateUser);
 }));

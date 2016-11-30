@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   		}
   	}
   	
-  	res.render("index", {media, media});
+  	res.render("index", {media: media, user:req.user});
   })
 });
 
@@ -69,5 +69,13 @@ router.post('/signup', passport.authenticate('signup', {
 	failureRedirect: '/signup',
 	failureFlash: true
 }));
+
+router.get('/logout', function(req, res){
+  var name = req.user.username;
+  console.log("Logging out " + req.user.username)
+  req.logout();
+  res.redirect('/');
+  req.session.notice = "You have successfully been logged out " + name;
+});
 
 module.exports = router;
