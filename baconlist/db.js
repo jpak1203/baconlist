@@ -8,6 +8,7 @@ var URLSlugs = require('mongoose-url-slugs');
 var User = new mongoose.Schema({
 	//username and password using plugin
 	username: String,
+	email: String,
     password: String,
     baconking:Number
 });

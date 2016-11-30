@@ -43,7 +43,7 @@
 		{{#each media}}
 		<div id="media-link" class="row">
 			<div class="col-xs-6">
-				<a href="{{this.url}}" >{{this.title}}</a>
+				<a href="{{this.url}}" >{{this.title}}</a> <span>by {{this.user.username}}</span>
 			</div>
 			<div class="col-xs-2">
 				<span id="voteNumber">votes: {{this.votes}}</span>

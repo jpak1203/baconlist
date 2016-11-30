@@ -36,7 +36,8 @@ router.post('/share', function(req, res, next) {
 	var newMedia = new Media({
 		title: req.body.title,
 		votes: 0,
-		url: req.body.url
+		url: req.body.url,
+		user: req.user
 	});
 
 	newMedia.save(function(err, media, count) {
