@@ -1,20 +1,41 @@
-<h1>BaconList</h1>
-<p>Welcome to BaconList</p>
+<div class="container-fluid">	
+	<div class="row">
+		<div class="col-xs-8">
+			<h1>BaconList</h1>
+			<p>Welcome to BaconList</p>
+		</div>
+		<div class="links col-xs-4">
+			<a href="/login">Login</a>
+			<a href="/signup">Signup</a>
 
-<form method="GET" action="/share">
-	<input type="submit" value="Share some bacon!" />
-</form>
+			<form method="GET" action="/share">
+				<input type="submit" value="Share some bacon!" />
+			</form>
+		</div>
+	</div>
+</div>
 
-<form method="GET" action="/login">
-	<input type="submit" value="Login" />
-</form>
+<div class="media container">
+	<form method="POST" action="/">
+		{{#each media}}
+		<div id="media-link" class="row">
+			<div class="col-xs-8">
+				<a href="{{this.url}}" >{{this.title}}</a>
+			</div>
+			<div class="col-xs-2">
+				<span id="voteNumber">votes: {{this.votes}}</span>
+			</div>
+			<div class="col-xs-2">
+				<input type="submit" name="button" class="btn btn-default" value={{this.title}} />
+			</div>
+		</div>
+		{{/each}}
+	</form>
+</div>
 
-<form method="GET" action="/signup">
-	<input type="submit" value="Signup" />
-</form>
+<script>
 
-<ul>
-	{{#each media}}
-	<li>{{this.title}} <a href="{{this.url}}" >{{this.url}}</a><span>votes: {{this.votes}}</span></li>
-	{{/each}}
-</ul>
+	document.addEventListener("DOMContentLoaded", function(event) {
+		
+	});
+</script>

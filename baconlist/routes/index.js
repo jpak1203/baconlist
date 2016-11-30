@@ -6,11 +6,16 @@ var passportConfig = require('./passport-config.js');
 var mongoose = require('mongoose');
 var Media = mongoose.model("Media");
 
-/* GET home page. */
+// GET home page.
 router.get('/', function(req, res, next) {
   Media.find(function(err, media, count) {
   	res.render("index", {media, media});
   })
+});
+
+router.post('/', function(req, res, next) {
+	Media.findOneAndUpdate({title:req.body.button}, {$inc:{votes:1}});
+	res.redirect('/');
 });
 
 router.get('/share', function(req, res, next) {
@@ -31,24 +36,23 @@ router.post('/share', function(req, res, next) {
 	res.redirect('/')
 });
 
-/* GET login page. */
+// GET login page.
 router.get('/login', function(req, res) {
-	// Display the Login page with any flash message, if any
 	res.render('login');
 });
 
-/* Handle Login POST */
+// Handle Login POST
 router.post('/login', passport.authenticate('login', {
 	successRedirect: '/',
 	failureRedirect: '/login',
 }));
 
-/* GET Registration Page */
+// GET Signup Page
 router.get('/signup', function(req, res){
 	res.render('signup',{message: req.flash('message')});
 });
 
-/* Handle Registration POST */
+// Handle Signup POST
 router.post('/signup', passport.authenticate('signup', {
 	successRedirect: '/',
 	failureRedirect: '/signup',
