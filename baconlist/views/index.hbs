@@ -38,12 +38,24 @@
 	</div>
 </div>
 
-<div class="media container">
+<ol class="breadcrumb">
+	<li id="general" class="tab active"><a href="/general">General</a></li>
+	<li id="sports" class="tab"><a href="/sports">Sports</a></li>
+	<li id="politics" class="tab"><a href="/politics">Politics</a></li>
+    <li id="food" class="tab"><a href="/food">Food</a></li>
+	<li id="fashion" class="tab"><a href="/fashion">Fashion</a></li>
+</ol>
+
+<div id="mediaList" class="media container">
 	<form method="POST" action="/">
 		{{#each media}}
 		<div id="media-link" class="row">
 			<div class="col-xs-6">
+				{{#if this.user}}
 				<a href="{{this.url}}" >{{this.title}}</a> <span>by {{this.user.username}}</span>
+				{{else}}
+				<a href="{{this.url}}" >{{this.title}}</a> <span>by public</span>
+				{{/if}}
 			</div>
 			<div class="col-xs-2">
 				<span id="voteNumber">votes: {{this.votes}}</span>
@@ -60,6 +72,136 @@
 
 	document.addEventListener("DOMContentLoaded", function(event) {
 		
+		var general = document.getElementById("general");
+		var sports = document.getElementById("sports");
+		var politics = document.getElementById("politics");
+		var food = document.getElementById("food");
+		var fashion = document.getElementById("fashion");
+
+		general.addEventListener('click', switchTabs);
+		sports.addEventListener('click', switchTabs);
+		politics.addEventListener('click', switchTabs);
+		food.addEventListener('click', switchTabs);
+		fashion.addEventListener('click', switchTabs);
 		
+		function switchTabs(evt) {
+			evt.preventDefault();
+
+			this.classList.add("active");
+			var tabs = document.getElementsByClassName("tab");
+			for (var i = 0; i < tabs.length; i++) {
+				if (tabs[i] !== this) {
+					tabs[i].classList.remove("active");
+				}
+			}
+
+			var req = new XMLHttpRequest();
+			var url = "http://localhost:3000/api/media";
+
+			req.open('GET', url, true);
+			req.addEventListener('load', handleFilterResponse);
+			req.send();
+
+			var category = this.id;
+			function handleFilterResponse() {
+				var data = JSON.parse(req.responseText);
+				var mediaList = document.getElementById("mediaList");
+				mediaList.innerHTML = "";
+				data.forEach(function(media) {
+					if (category === "general") {
+						var div1 = document.createElement("div");
+						div1.classList.add("row");
+						var div2 = document.createElement("div");
+						div2.classList.add("col-xs-6");
+						var div3 = document.createElement("div");
+						div3.classList.add("col-xs-2");
+						var div4 = document.createElement("div");
+						div4.classList.add("col-xs-4");
+
+						var link = document.createElement("a");
+						link.href = media.link;
+						link.innerHTML = media.title;
+						div2.appendChild(link);
+
+						var user = document.createElement("span");
+						if (media.user === undefined) {
+							user.innerHTML = "by public";
+						}
+						else {
+							user.innerHTML = "by " + media.user.username;
+						}
+						div2.appendChild(user);
+
+						var voteNum = document.createElement("span");
+						voteNum.innerHTML = "vote : " + media.votes;
+						div3.appendChild(voteNum);
+
+						var voteText = document.createElement("span");
+						voteText.innerHTML = "Vote for : ";
+						var voteButton = document.createElement("input");
+						voteButton.type = "submit";
+						voteButton.name = "button";
+						voteButton.classList.add("btn");
+						voteButton.classList.add("btn-default");
+						voteButton.value = media.title;
+						div4.appendChild(voteText);
+						div4.appendChild(voteButton);
+
+						div1.id = "media-link";
+						div1.appendChild(div2);
+						div1.appendChild(div3);
+						div1.appendChild(div4);
+
+						mediaList.appendChild(div1);
+					}
+					else if (media.category === category) {
+						var div1 = document.createElement("div");
+						div1.classList.add("row");
+						var div2 = document.createElement("div");
+						div2.classList.add("col-xs-6");
+						var div3 = document.createElement("div");
+						div3.classList.add("col-xs-2");
+						var div4 = document.createElement("div");
+						div4.classList.add("col-xs-4");
+
+						var link = document.createElement("a");
+						link.href = media.link;
+						link.innerHTML = media.title;
+						div2.appendChild(link);
+
+						var user = document.createElement("span");
+						if (media.user === undefined) {
+							user.innerHTML = "by public";
+						}
+						else {
+							user.innerHTML = "by " + media.user.username;
+						}
+						div2.appendChild(user);
+
+						var voteNum = document.createElement("span");
+						voteNum.innerHTML = "vote : " + media.votes;
+						div3.appendChild(voteNum);
+
+						var voteText = document.createElement("span");
+						voteText.innerHTML = "Vote for : ";
+						var voteButton = document.createElement("input");
+						voteButton.type = "submit";
+						voteButton.name = "button";
+						voteButton.classList.add("btn");
+						voteButton.classList.add("btn-default");
+						voteButton.value = media.title;
+						div4.appendChild(voteText);
+						div4.appendChild(voteButton);
+
+						div1.id = "media-link";
+						div1.appendChild(div2);
+						div1.appendChild(div3);
+						div1.appendChild(div4);
+
+						mediaList.appendChild(div1);
+					}
+				})
+			}
+		}
 	});
 </script>

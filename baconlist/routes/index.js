@@ -28,6 +28,22 @@ router.post('/', function(req, res, next) {
 	res.redirect('/');
 });
 
+router.get('/api/media/', function(req, res) {
+	var mediaFilter = {};
+
+	Media.find(mediaFilter, function(err, media, count) {
+		res.json(media.map(function(ele) {
+			return {
+				"title":ele.title,
+				"votes":ele.votes,
+				"url":ele.url,
+				"category":ele.category,
+				"user":ele.user
+			};
+		}));
+	});
+});
+
 router.get('/share', function(req, res, next) {
 	res.render('share')
 });
@@ -37,6 +53,7 @@ router.post('/share', function(req, res, next) {
 		title: req.body.title,
 		votes: 0,
 		url: req.body.url,
+		category: req.body.category,
 		user: req.user
 	});
 
