@@ -4,21 +4,23 @@ var passport = require('passport');
 var passportConfig = require('./passport-config.js');
 
 var mongoose = require('mongoose');
+var User = mongoose.model("User");
 var Media = mongoose.model("Media");
+var Comments = mongoose.model("Comments");
 
 // GET home page.
 router.get('/', function(req, res, next) {
-  Media.find(function(err, media, count) {
-  	for (var i = 1; i < media.length; i++) {
-  		if (media[i].votes > media[i-1].votes) {
-  			var temp = media[i];
-  			media[i] = media[i-1];
-  			media[i-1] = temp;
-  		}
-  	}
-  	
-  	res.render("index", {media: media, user:req.user});
-  })
+	Media.find(function(err, media, count) {
+		for (var i = 1; i < media.length; i++) {
+			if (media[i].votes > media[i-1].votes) {
+				var temp = media[i];
+				media[i] = media[i-1];
+				media[i-1] = temp;
+			}
+		}
+
+		res.render("index", {media: media, user:req.user});
+	  })
 });
 
 router.post('/', function(req, res, next) {
@@ -57,6 +59,7 @@ router.post('/share', function(req, res, next) {
 		user: req.user
 	});
 
+	console.log(newMedia);
 	newMedia.save(function(err, media, count) {
 		console.log(media);
 	})
@@ -95,5 +98,42 @@ router.get('/logout', function(req, res){
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name;
 });
+
+router.get('/:slug', function(req, res, next) {
+	User.findOne({slug:req.params.slug}, function(err, usr, count) {
+		console.log(usr);
+		res.render('user-page', {user:usr});
+	})
+});
+
+router.get('/media/:slug', function(req, res, next) {
+	Media.findOne({title:req.params.slug}, function(err, media, count) {
+		console.log(media);
+		res.render('expand-link', {media:media});
+	})
+});
+
+router.post('/media/:slug', function(req, res, next) {
+
+	var user;
+	if (req.user === undefined) {
+		user = publicUser = new User({
+			username: "public"
+		});
+	}
+	else {
+		user = req.user;
+	}
+	var newComment = new Comments({
+		comment:req.body.comment,
+		user:user
+	});
+
+	Media.findOneAndUpdate({title:req.params.slug}, {$push:{comments:newComment}}, function(err, media, count) {
+		console.log(media);
+		res.redirect(req.get('referer'));
+	});
+})
+
 
 module.exports = router;

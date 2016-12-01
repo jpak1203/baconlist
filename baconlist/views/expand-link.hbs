@@ -1,0 +1,40 @@
+<div class="container">   
+    <div id="media-link" class="row">
+        <div class="col-xs-6">
+            {{#if media.user}}
+            <a href="{{media.url}}" >{{media.title}}</a> <span>by {{media.user.username}}</span>
+            {{else}}
+            <a href="{{media.url}}" >{{media.title}}</a> <span>by public</span>
+            {{/if}}
+        </div>
+        <div class="col-xs-2">
+            <span id="voteNumber">votes: {{media.votes}}</span>
+        </div>
+        <div class="col-xs-4">
+            <span>Vote for : </span><input type="submit" name="button" class="btn btn-default" value={{media.title}} />
+        </div>
+    </div>
+</div>
+
+<div class="comments">
+    <h3>Comments</h3>
+     
+     <div>
+            <ul>
+                {{#each media.comments}}
+                <li class="comment-section">{{this.comment}} <span id="user-comment">by {{this.user.username}}</span></li>
+                {{/each}}
+            </ul>
+     </div>
+</div>
+
+<form method="POST" action="">
+    <input type="text" id="comment-box" name="comment" placeHolder="Write a comment" />
+    <input type="submit" id="comment-post" name="comment-post" value="Post Comment" />
+</form>
+
+<br />
+<div>
+    <a href="/">Back to Home</a> |
+    <a href="/share">Share Bacon</a>
+</div>

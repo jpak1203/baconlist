@@ -53,3 +53,17 @@ form {
   cursor: default;
   opacity: 0.5;
 }
+
+#comment-box {
+  width:75%;
+  height:50px;
+}
+
+#user-comment {
+  color:lightblue;
+}
+
+.comment-section {
+  border:1px dotted black;
+  padding:10px;
+}

@@ -13,6 +13,11 @@ var User = new mongoose.Schema({
     baconking:Number
 });
 
+var Comments = new mongoose.Schema({
+	comment:String,
+	user: User
+});
+
 //media file
 // stores votes to determine baconking
 // url link for media file
@@ -21,11 +26,15 @@ var Media = new mongoose.Schema({
 	votes: Number,
 	url: String,
 	category: String,
-	user: User
+	user: User,
+	comments: [Comments]
 });
+
+User.plugin(URLSlugs("username"));
 
 mongoose.model("User", User);
 mongoose.model("Media", Media);
+mongoose.model("Comments", Comments);
 
 // is the environment variable, NODE_ENV, set to PRODUCTION? 
 if (process.env.NODE_ENV == 'PRODUCTION') {

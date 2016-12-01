@@ -18,7 +18,7 @@
 				<li>
 				{{#if user}}
 				<li>
-					<p id="welcome"><strong>Hi,</strong> {{user.username}}</p>
+					<p id="welcome"><strong>Hi,</strong> <a href="/{{user.slug}}">{{user.username}}</a></p>
 				</li>
 				<li>
 					<a href="/logout">Log Out</a>
@@ -52,16 +52,17 @@
 		<div id="media-link" class="row">
 			<div class="col-xs-6">
 				{{#if this.user}}
-				<a href="{{this.url}}" >{{this.title}}</a> <span>by {{this.user.username}}</span>
+				<a href="{{this.url}}">{{this.title}}</a> <span>by {{this.user.username}}</span>
 				{{else}}
-				<a href="{{this.url}}" >{{this.title}}</a> <span>by public</span>
+				<a href="{{this.url}}">{{this.title}}</a> <span>by public</span>
 				{{/if}}
 			</div>
 			<div class="col-xs-2">
 				<span id="voteNumber">votes: {{this.votes}}</span>
 			</div>
 			<div class="col-xs-4">
-				<span>Vote for : </span><input type="submit" name="button" class="btn btn-default" value={{this.title}} />
+				<span>Vote for : </span><input type="submit" id="voteButton" name="button" class="btn btn-default" value={{this.title}} />
+				<a href="/media/{{this.title}}">expand</a>
 			</div>
 		</div>
 		{{/each}}
@@ -144,8 +145,12 @@
 						voteButton.classList.add("btn");
 						voteButton.classList.add("btn-default");
 						voteButton.value = media.title;
+						var expand = document.createElement("a");
+						expand.href = "/media/" + media.title;
+						expand.innerHTML = "expand";
 						div4.appendChild(voteText);
 						div4.appendChild(voteButton);
+						div4.appendChild(expand);
 
 						div1.id = "media-link";
 						div1.appendChild(div2);
@@ -190,8 +195,12 @@
 						voteButton.classList.add("btn");
 						voteButton.classList.add("btn-default");
 						voteButton.value = media.title;
+						var expand = document.createElement("a");
+						expand.href = "/media/" + media.title;
+						expand.innerHTML = "expand";
 						div4.appendChild(voteText);
 						div4.appendChild(voteButton);
+						div4.appendChild(expand);
 
 						div1.id = "media-link";
 						div1.appendChild(div2);
