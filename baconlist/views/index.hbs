@@ -99,7 +99,8 @@
 			}
 
 			var req = new XMLHttpRequest();
-			var url = "http://localhost:3000/api/media";
+			console.log(location.origin);
+			var url = location.origin + "/api/media";
 
 			req.open('GET', url, true);
 			req.addEventListener('load', handleFilterResponse);
