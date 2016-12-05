@@ -51,17 +51,35 @@ router.get('/share', function(req, res, next) {
 });
 
 router.post('/share', function(req, res, next) {
+	var user;
+	if (req.user === undefined) {
+		user = new User({
+			username: "public",
+			email: "public",
+			password: "",
+			baconking: 0
+		});
+	}
+	else {
+		user = req.user;
+	}
+
 	var newMedia = new Media({
 		title: req.body.title,
 		votes: 0,
 		url: req.body.url,
 		category: req.body.category,
-		user: req.user
+		user: user,
+		comments: [],
 	});
 
+	console.log(newMedia);
 	newMedia.save(function(err, media, count) {
+		if (err) {
+			console.error(err);
+		}
 		console.log(media);
-	})
+	});
 	
 	res.redirect('/')
 });
@@ -96,13 +114,6 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
   req.session.notice = "You have successfully been logged out " + name;
-});
-
-router.get('/:slug', function(req, res, next) {
-	User.findOne({slug:req.params.slug}, function(err, usr, count) {
-		console.log(usr);
-		res.render('user-page', {user:usr});
-	})
 });
 
 router.get('/media/:slug', function(req, res, next) {

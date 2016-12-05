@@ -18,7 +18,7 @@
 				<li>
 				{{#if user}}
 				<li>
-					<p id="welcome"><strong>Hi,</strong> <a href="/{{user.slug}}">{{user.username}}</a></p>
+					<p id="welcome"><strong>Hi,</strong> <span>{{user.username}}</span></p>
 				</li>
 				<li>
 					<a href="/logout">Log Out</a>
@@ -61,7 +61,7 @@
 				<span id="voteNumber">votes: {{this.votes}}</span>
 			</div>
 			<div class="col-xs-4">
-				<span>Vote for : </span><input type="submit" id="voteButton" name="button" class="btn btn-default" value={{this.title}} />
+				<span>Vote for : </span><input type="submit" id="voteButton" name="button" class="btn btn-default" value="{{this.title}}" />
 				<a href="/media/{{this.title}}">expand</a>
 			</div>
 		</div>
