@@ -109,6 +109,7 @@
 				var mediaList = document.getElementById("mediaList");
 				mediaList.innerHTML = "";
 				data.forEach(function(media) {
+					console.log(media);
 					if (category === "general") {
 						var div1 = document.createElement("div");
 						div1.classList.add("row");
@@ -120,7 +121,7 @@
 						div4.classList.add("col-xs-4");
 
 						var link = document.createElement("a");
-						link.href = media.link;
+						link.href = media.url;
 						link.innerHTML = media.title;
 						div2.appendChild(link);
 
@@ -170,7 +171,7 @@
 						div4.classList.add("col-xs-4");
 
 						var link = document.createElement("a");
-						link.href = media.link;
+						link.href = media.url;
 						link.innerHTML = media.title;
 						div2.appendChild(link);
 

@@ -59,7 +59,6 @@ router.post('/share', function(req, res, next) {
 		user: req.user
 	});
 
-	console.log(newMedia);
 	newMedia.save(function(err, media, count) {
 		console.log(media);
 	})
