@@ -61,8 +61,10 @@
 				<span id="voteNumber">votes: {{this.votes}}</span>
 			</div>
 			<div class="col-xs-4">
-				<span>Vote for : </span><input type="submit" id="voteButton" name="button" class="btn btn-default" value="{{this.title}}" />
-				<a href="/media/{{this.title}}">expand</a>
+				<form method="POST" action="">
+					<span>Vote for : </span><input type="submit" id="voteButton" name="button" class="btn btn-default" value="{{this.title}}" />
+					<a href="/media/{{this.title}}">expand</a>
+				</form>
 			</div>
 		</div>
 		{{/each}}
@@ -108,8 +110,9 @@
 				var data = JSON.parse(req.responseText);
 				var mediaList = document.getElementById("mediaList");
 				mediaList.innerHTML = "";
+				var mediaArray = [];
 				data.forEach(function(media) {
-					console.log(media);
+
 					if (category === "general") {
 						var div1 = document.createElement("div");
 						div1.classList.add("row");
@@ -138,6 +141,9 @@
 						voteNum.innerHTML = "vote : " + media.votes;
 						div3.appendChild(voteNum);
 
+						var form = document.createElement("form");
+						form.method = "POST";
+						form.action = "";
 						var voteText = document.createElement("span");
 						voteText.innerHTML = "Vote for : ";
 						var voteButton = document.createElement("input");
@@ -149,16 +155,19 @@
 						var expand = document.createElement("a");
 						expand.href = "/media/" + media.title;
 						expand.innerHTML = "expand";
-						div4.appendChild(voteText);
-						div4.appendChild(voteButton);
-						div4.appendChild(expand);
+						form.appendChild(voteText);
+						form.appendChild(voteButton);
+						form.appendChild(expand);
+						div4.appendChild(form);
 
 						div1.id = "media-link";
 						div1.appendChild(div2);
 						div1.appendChild(div3);
 						div1.appendChild(div4);
 
-						mediaList.appendChild(div1);
+						mediaArray.push(div1);
+
+						//mediaList.appendChild(div1);
 					}
 					else if (media.category === category) {
 						var div1 = document.createElement("div");
@@ -188,6 +197,9 @@
 						voteNum.innerHTML = "vote : " + media.votes;
 						div3.appendChild(voteNum);
 
+						var form = document.createElement("form");
+						form.method = "POST";
+						form.action = "";
 						var voteText = document.createElement("span");
 						voteText.innerHTML = "Vote for : ";
 						var voteButton = document.createElement("input");
@@ -199,18 +211,37 @@
 						var expand = document.createElement("a");
 						expand.href = "/media/" + media.title;
 						expand.innerHTML = "expand";
-						div4.appendChild(voteText);
-						div4.appendChild(voteButton);
-						div4.appendChild(expand);
+						form.appendChild(voteText);
+						form.appendChild(voteButton);
+						form.appendChild(expand);
+						div4.appendChild(form);
 
 						div1.id = "media-link";
 						div1.appendChild(div2);
 						div1.appendChild(div3);
 						div1.appendChild(div4);
 
-						mediaList.appendChild(div1);
+						mediaArray.push(div1);
+
+						//mediaList.appendChild(div1);
 					}
+
 				})
+				for (var i = 1; i < mediaArray.length; i++) {
+					var mediaArrayVotesFirst = parseInt(mediaArray[i].childNodes[1].innerHTML.split(":")[1].substr(1,1));
+					var mediaArrayVotesSecond = parseInt(mediaArray[i-1].childNodes[1].innerHTML.split(":")[1].substr(1,1));
+					
+					if (mediaArrayVotesFirst > mediaArrayVotesSecond) {
+						var tmp = mediaArray[i];
+						mediaArray[i] = mediaArray[i-1];
+						mediaArray[i-1] = tmp;
+					}
+				}
+
+				for (var i = 0; i < mediaArray.length; i++) {
+					mediaList.appendChild(mediaArray[i]);
+				}
+
 			}
 		}
 	});
