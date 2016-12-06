@@ -1,17 +1,14 @@
 <div class="container">   
     <div id="media-link" class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-8">
             {{#if media.user}}
             <a href="{{media.url}}" >{{media.title}}</a> <span>by {{media.user.username}}</span>
             {{else}}
             <a href="{{media.url}}" >{{media.title}}</a> <span>by public</span>
             {{/if}}
         </div>
-        <div class="col-xs-2">
-            <span id="voteNumber">votes: {{media.votes}}</span>
-        </div>
         <div class="col-xs-4">
-            <span>Vote for : </span><input type="submit" name="button" class="btn btn-default" value={{media.title}} />
+            <span id="voteNumber">votes: {{media.votes}}</span>
         </div>
     </div>
 </div>
