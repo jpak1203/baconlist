@@ -1,14 +1,16 @@
-<h1>Sign Up for Baconlist</h1>
+<div class="signup-page">
+	<h1>Sign Up for Baconlist</h1>
 
-<form method="POST" action="/signup">
-	<input type="text" name="username" placeholder="Username" required />
-	<input type="email" name="email" placeholder="Email" required />
-	<input type="password" name="password" placeholder="Password" required />
-	<input type="submit" value="Login" />
-</form>
+	<form method="POST" action="/signup">
+		<input type="text" class="input-text" name="username" placeholder="Username" required />
+		<input type="email" class="input-text" name="email" placeholder="Email" required />
+		<input type="password" class="input-text" name="password" placeholder="Password" required />
+		<input type="submit" class="input-button" value="Login" />
+	</form>
 
-<br />
-<div>
-    <a href="/">Back to Home</a> |
-    <a href="/login">Already have an account?</a>
+	<br />
+	<div>
+		<a href="/">Back to Home</a> |
+		<a href="/login">Already have an account?</a>
+	</div>
 </div>

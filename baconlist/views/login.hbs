@@ -1,17 +1,21 @@
-<h1>Log In to Baconlist</h1>
+<div class="login-page">
 
-{{#if error}}
-    <div class="alert alert-danger">{{error}}</div>
-{{/if}}
+	<h1>Log In to Baconlist</h1>
 
-<form method="POST" action="/login">
-	<input type="text" name="username" placeholder="Username" required />
-	<input type="password" name="password" placeholder="Password" required />
-	<input type="submit" value="Login" />
-</form>
+	{{#if error}}
+		<div class="alert alert-danger">{{error}}</div>
+	{{/if}}
 
-<br />
-<div>
-    <a href="/">Back to Home</a> |
-    <a href="/signup">Don't have an account?</a>
+	<form method="POST" action="/login">
+		<input type="text" class="input-text" name="username" placeholder="Username" required />
+		<input type="password" class="input-text" name="password" placeholder="Password" required />
+		<input type="submit" class="input-button" value="Login" />
+	</form>
+
+	<br />
+	<div>
+		<a href="/">Back to Home</a> |
+		<a href="/signup">Don't have an account?</a>
+	</div>
+
 </div>

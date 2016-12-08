@@ -1,12 +1,27 @@
 body {
   padding: 25px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color:rgba(238,191,119,0.5) !important;
+  color: rgb(214,129,61) !important;
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(150,0,0) !important;
+  text-decoration:none !important;
   font-size: 17px;
   padding: 10px;
+}
+
+a:hover {
+  color: rgba(255,153,153,0.7) !important;
+  text-decoration:none !important;
+}
+
+h1 {
+  color: rgb(200,0,0) !important;
+}
+
+.category-selector {
+  background-color:rgba(243,89,89,0.7) !important;
 }
 
 ul {
@@ -32,8 +47,8 @@ form {
 }
 
 #media-link {
- border: 0.5px solid black;
- padding:5px;
+ border: 0.5px solid rgb(150,0,0);
+ padding: 5px;
 }
 
 .login-signup {
@@ -57,13 +72,103 @@ form {
 #comment-box {
   width:75%;
   height:50px;
+  text-align:left !important;
+  font-size:15px;
+}
+
+#comment-post {
+  font-size:15px;
+}
+
+#comment-post:hover {
+  background-color:rgba(255,153,153,0.7) !important;
+  color:red !important;
 }
 
 #user-comment {
-  color:lightblue;
+  color: rgb(200,0,0) !important;
 }
 
 .comment-section {
   border:1px dotted black;
   padding:10px;
+}
+
+.login-page {
+  text-align:center;
+  border: 1px dotted rgb(200,0,0);
+  padding:100px 100px;
+}
+
+.signup-page {
+  text-align:center;
+  border: 1px dotted rgb(200,0,0);
+  padding:100px 100px;
+}
+
+.share-page {
+  text-align:center;
+  border: 1px dotted rgb(200,0,0);
+  padding:100px 100px;
+}
+
+.voteButton {
+  background-color:rgba(243,89,89,0.7) !important;
+  border:none !important;
+}
+
+.voteButton:hover {
+  background-color:rgba(255,153,153,0.7) !important;
+}
+
+#shareButton {
+  background-color:rgb(243,89,89) !important;
+  border:none;
+}
+
+#shareButton:hover {
+  background-color:rgba(255,153,153,0.7) !important;
+}
+
+.input-text {
+  background-color:transparent !important;
+  border: none;
+  border-bottom:1px solid rgb(200,0,0);
+  text-align:center;
+  color:red !important;
+  font-size:20px;
+}
+
+input:focus {
+  outline:none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: red;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: red;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: red;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: red;
+}
+
+.input-button {
+  background-color:rgba(243,80,80,0.7) !important;
+  color:rgb(150,0,0) !important;
+  border-radius:5px;
+  border:none;
+  font-size:20px;
+}
+
+#loginButton:hover {
+  background-color:rgba(255,153,153,0.7) !important;
+  color:red !important;
+}
+
+.breadcrumb > li + li:before {
+    color: #9c4141 !important;
 }
