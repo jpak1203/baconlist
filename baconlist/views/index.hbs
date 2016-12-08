@@ -228,15 +228,16 @@
 					}
 
 				})
-				for (var i = 1; i < mediaArray.length; i++) {
-					var mediaArrayVotesFirst = parseInt(mediaArray[i].childNodes[1].innerHTML.split(":")[1].substr(1,1));
-					var mediaArrayVotesSecond = parseInt(mediaArray[i-1].childNodes[1].innerHTML.split(":")[1].substr(1,1));
+				mediaArray.sort(descendingOrder);
+
+				function descendingOrder(a, b) {
+					var mediaArrayVotesFirst = a.childNodes[1].innerHTML.split(":")[1].substr(1);
+					var mediaArrayVotesSecond = b.childNodes[1].innerHTML.split(":")[1].substr(1);
+
+					var firstVoteNum = parseInt(mediaArrayVotesFirst.replace("</span>", ""));
+					var secondVoteNum = parseInt(mediaArrayVotesSecond.replace("</span>", ""));
 					
-					if (mediaArrayVotesFirst > mediaArrayVotesSecond) {
-						var tmp = mediaArray[i];
-						mediaArray[i] = mediaArray[i-1];
-						mediaArray[i-1] = tmp;
-					}
+					return secondVoteNum - firstVoteNum;
 				}
 
 				for (var i = 0; i < mediaArray.length; i++) {

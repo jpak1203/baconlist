@@ -11,11 +11,14 @@ var Comments = mongoose.model("Comments");
 // GET home page.
 router.get('/', function(req, res, next) {
 	Media.find(function(err, media, count) {
-		for (var i = 1; i < media.length; i++) {
-			if (media[i].votes > media[i-1].votes) {
-				var temp = media[i];
-				media[i] = media[i-1];
-				media[i-1] = temp;
+		if (err) {
+			console.log(err);
+		}
+		else {
+			media.sort(highToLow);
+
+			function highToLow(a, b) {
+				return b.votes - a.votes;
 			}
 		}
 
@@ -25,7 +28,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
 	Media.findOneAndUpdate({title:req.body.button}, {$inc:{votes:1}}, function(err, media, count) {
-		console.log(media);
+		if (err) {
+			console.log(err);
+		}
+		else {
+			console.log(media);
+		}
 	});
 	res.redirect('/');
 });
@@ -34,15 +42,20 @@ router.get('/api/media/', function(req, res) {
 	var mediaFilter = {};
 
 	Media.find(mediaFilter, function(err, media, count) {
-		res.json(media.map(function(ele) {
-			return {
-				"title":ele.title,
-				"votes":ele.votes,
-				"url":ele.url,
-				"category":ele.category,
-				"user":ele.user
-			};
-		}));
+		if (err) {
+			console.log(err);
+		}
+		else {
+			res.json(media.map(function(ele) {
+				return {
+					"title":ele.title,
+					"votes":ele.votes,
+					"url":ele.url,
+					"category":ele.category,
+					"user":ele.user
+				};
+			}));
+		}
 	});
 });
 
@@ -84,24 +97,20 @@ router.post('/share', function(req, res, next) {
 	res.redirect('/')
 });
 
-// GET login page.
 router.get('/login', function(req, res) {
 	res.render("login", {action: 'Log in', error: req.flash('error')});
 });
 
-// Handle Login POST
 router.post('/login', passport.authenticate('login', {
 	successRedirect: '/',
 	failureRedirect: '/login',
 	failureFlash: true
 }));
 
-// GET Signup Page
 router.get('/signup', function(req, res){
 	res.render('signup',{message: req.flash('message')});
 });
 
-// Handle Signup POST
 router.post('/signup', passport.authenticate('signup', {
 	successRedirect: '/',
 	failureRedirect: '/signup',
@@ -140,6 +149,9 @@ router.post('/media/:slug', function(req, res, next) {
 	});
 
 	Media.findOneAndUpdate({title:req.params.slug}, {$push:{comments:newComment}}, function(err, media, count) {
+		if (err) {
+			console.log(err);
+		}
 		console.log(media);
 		res.redirect(req.get('referer'));
 	});
