@@ -172,3 +172,8 @@ input:focus {
 .breadcrumb > li + li:before {
     color: #9c4141 !important;
 }
+
+.categoryButton {
+  background-color:#f6dfbb;
+  border: 1px solid red !important;
+}

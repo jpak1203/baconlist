@@ -2,9 +2,19 @@
 	<h1>Share some Bacon</h1>
 
 	<form method="POST" action="/share">
-		<input type="text" class="input-text" name="title" placeholder="Title" />
-		<input type="url" class="input-text" name="url" placeholder="URL" />
-		<input type="text" class="input-text" name="category" placeholder="Category" />
+		<input type="text" class="input-text" name="title" placeholder="Title" required />
+		<input type="url" class="input-text" name="url" placeholder="URL" required />
+		<input type="hidden" id="category" name="category">
+		<div class="btn-group">
+			<button type="button" data-toggle="dropdown" class="categoryButton btn dropdown-toggle">Categories<span class="glyphicon glyphicon-arrow-down"></span></button>
+			<ul class="dropdown-menu dropdown-menu-right">
+        		<li onclick="$('#category').val('general')"><a href="#">General</a></li>
+				<li onclick="$('#category').val('sports')"><a href="#">Sports</a></li>
+				<li onclick="$('#category').val('politics')"><a href="#">Politics</a></li>
+				<li onclick="$('#category').val('food')"><a href="#">Food</a></li>
+				<li onclick="$('#category').val('fashion')"><a href="#">Fashion</a></li>
+			</ul>
+		</div>
 		<input type="submit" class="input-button" value="Submit" />
 	</form>
 
@@ -15,3 +25,18 @@
 
 	</div>
 </div>
+
+<script>
+
+	$(function(){
+
+		$(".dropdown-menu li a").click(function(){
+
+		  $(".btn:first-child").text($(this).text());
+		  $(".btn:first-child").val($(this).text());
+
+	   });
+
+	});
+
+</script>
