@@ -9,7 +9,6 @@ var User = new mongoose.Schema({
 	username: String,
 	email: String,
     password: String,
-    baconking:Number
 });
 
 var Comments = new mongoose.Schema({
