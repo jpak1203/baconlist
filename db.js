@@ -35,12 +35,12 @@ mongoose.model("User", User);
 mongoose.model("Media", Media);
 mongoose.model("Comments", Comments);
 
-var uristring = process.env.MONGOLAB_URI;
+var uri = "mongodb://jpak1203:spdp1207@https://bacon-list.herokuapp.com:443";
 
-mongoose.connect(uristring, function (err, res) {
+mongoose.connect(uri, function (err, res) {
 	if (err) {
-		console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+		console.log ('ERROR connecting to: ' + uri + '. ' + err);
 	} else {
-		console.log ('Succeeded connected to: ' + uristring);
+		console.log ('Succeeded connected to: ' + uri);
 	}
 });
