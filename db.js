@@ -35,7 +35,7 @@ mongoose.model("User", User);
 mongoose.model("Media", Media);
 mongoose.model("Comments", Comments);
 
-var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/baconlist';
+var uristring = process.env.MONGOLAB_URI;
 
 mongoose.connect(uristring, function (err, res) {
 	if (err) {
