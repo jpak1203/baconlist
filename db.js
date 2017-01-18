@@ -44,7 +44,7 @@ mongoose.model("Comments", Comments);
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } }; 
 
-var mongodbUri = 'mongodb://heroku_vdwsksbr:l1t68jhc8bdgkoqfngsltvu3no@ds117869.mlab.com:17869/heroku_vdwsksbr';
+var mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost/baconlist';
 
 mongoose.connect(mongodbUri, options);
 var conn = mongoose.connection;             
