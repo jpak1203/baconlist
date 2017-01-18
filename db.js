@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var URLSlugs = require('mongoose-url-slugs');
 
 //users
 // our site requires authentication...
@@ -28,6 +29,7 @@ var Media = new mongoose.Schema({
 	comments: [Comments]
 });
 
+Media.plugin(URLSlugs('title'));
 
 mongoose.model("User", User);
 mongoose.model("Media", Media);
