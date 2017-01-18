@@ -33,4 +33,11 @@ mongoose.model("User", User);
 mongoose.model("Media", Media);
 mongoose.model("Comments", Comments);
 
-mongoose.connect('mongodb://localhost/jmp748');
+var uristring = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/baconlist';
+
+mongoose.connect(uristring, function (err, res) {
+	if (err) {
+		console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+	} else {
+		console.log ('Succeeded connected to: ' + uristring);
+	}
