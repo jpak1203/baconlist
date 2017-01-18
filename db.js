@@ -41,3 +41,4 @@ mongoose.connect(uristring, function (err, res) {
 	} else {
 		console.log ('Succeeded connected to: ' + uristring);
 	}
+});
