@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+var port = process.env.PORT || 3000;
 
 require('./db');
 
@@ -52,5 +53,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.listen(port, function() {
+	console.log('listening on port 3000');
+})
 
 module.exports = app;
