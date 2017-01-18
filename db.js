@@ -35,12 +35,20 @@ mongoose.model("User", User);
 mongoose.model("Media", Media);
 mongoose.model("Comments", Comments);
 
-var uri = "mongodb://jpak1203:spdp1207@https://bacon-list.herokuapp.com:443";
+/* 
+ * Mongoose by default sets the auto_reconnect option to true.
+ * We recommend setting socket options at both the server and replica set level.
+ * We recommend a 30 second connection timeout because it allows for 
+ * plenty of time in most operating environments.
+ */
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } }; 
 
-mongoose.connect(uri, function (err, res) {
-	if (err) {
-		console.log ('ERROR connecting to: ' + uri + '. ' + err);
-	} else {
-		console.log ('Succeeded connected to: ' + uri);
-	}
+var mongodbUri = 'mongodb://heroku_vdwsksbr:l1t68jhc8bdgkoqfngsltvu3no@ds117869.mlab.com:17869/heroku_vdwsksbr';
+
+mongoose.connect(mongodbUri, options);
+var conn = mongoose.connection;             
+conn.on('error', console.error.bind(console, 'connection error:'));  
+conn.once('open', function() {
+// Wait for the database connection to establish, then start the app.                         
 });
