@@ -68,9 +68,3 @@ var Comments = new mongoose.Schema({
 3. as a user, I can vote on media link
 4. as a user, I can go through different categories
 5. as a user, I can comment on media links
-
-## Research Topics
-- (6 points) User Authentication
-  - I will use Passportjs for user authentication
-- (2 points) Mobile Compatibility/CSS framework
-  - I will be using Boostrap to make my web application mobile compatible

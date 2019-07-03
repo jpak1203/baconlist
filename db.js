@@ -41,12 +41,18 @@ mongoose.model("Comments", Comments);
  * We recommend a 30 second connection timeout because it allows for 
  * plenty of time in most operating environments.
  */
-var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
-                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } }; 
+var options = {
+	useNewUrlParser: true,
+	socketTimeoutMS: 30000,
+	keepAlive: true,
+	reconnectTries: 30
+ }
 
-var mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost/baconlist';
+var mongodbUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/baconlist';
 
+console.log(mongodbUri)
 mongoose.connect(mongodbUri, options);
+
 var conn = mongoose.connection;             
 conn.on('error', console.error.bind(console, 'connection error:'));  
 conn.once('open', function() {

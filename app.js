@@ -16,13 +16,13 @@ var app = express();
 // Configuring Passport
 var passport = require('passport');
 var expressSession = require('express-session');
-app.use(expressSession({secret: 'mySecretKey'}));
+app.use(expressSession({secret: 'mySecretKey', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set('view engine', '.hbs');
 
 app.use(flash());
 
